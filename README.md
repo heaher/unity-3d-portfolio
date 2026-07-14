@@ -1,4 +1,4 @@
-# 作品名
+# 約20秒の短尺3Dキャラクター演出
 
 ![thumbnail](./Images/thumbnail.png)
 
