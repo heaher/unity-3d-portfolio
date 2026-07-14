@@ -52,6 +52,21 @@
 
 ---
 
+## 制作ツール / Blenderアドオン
+
+| 項目 | 内容 |
+|---|---|
+| 名称 | Wiggle 2 |
+| 作者 | shteeve3d |
+| 種別 | Blenderアドオン |
+| 配布元 | GitHub |
+| 配布ページ | [shteeve3d/blender-wiggle-2](https://github.com/shteeve3d/blender-wiggle-2) |
+| ライセンス | [GNU General Public License v3.0](https://github.com/shteeve3d/blender-wiggle-2/blob/main/LICENSE) |
+| 使用箇所 | 猫耳、髪、スカート、尻尾、衣装などの揺れ表現 |
+| 備考 | Blender 4.2 LTS上で使用し、生成した揺れをNLAと補正用Actionで調整しています。 |
+
+---
+
 ## サウンド / BGM / SE
 
 | 種別 | 素材名 | 作者 | 配布元 | 配布ページ | ライセンス / 利用規約 | 使用箇所 | 備考 |
