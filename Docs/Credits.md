@@ -3,7 +3,7 @@
 本作品では、以下の素材・アセット・ライブラリを使用しています。  
 各素材・アセットの著作権は、それぞれの制作者・権利者に帰属します。
 
-また、本リポジトリでは再配布不可の有料アセットを含めないようにしており、Unityプロジェクト本体は公開していません。
+また、本リポジトリには、各配布元から取得した外部素材・アセットのデータ本体、およびUnityプロジェクト本体は含まれていません。
 
 ---
 
@@ -17,7 +17,7 @@
 | 配布ページ | [BOOTH 商品ページ](https://komado.booth.pm/items/4876459) |
 | 利用規約 | [Google Drive上の利用規約](https://drive.google.com/file/d/1ZuUI_L2yIj1-i5VvtJ0Jm90gi1ETnd3g/view?pli=1) |
 | 使用箇所 | メインキャラクター |
-| 備考 | 有料アセットのため、本リポジトリにはアバターデータ本体を含めていません。 |
+| 備考 | — |
 
 ---
 
@@ -31,7 +31,7 @@
 | 配布ページ | [Unity Asset Store 商品ページ](https://assetstore.unity.com/packages/3d/environments/landscapes/mountain-stylized-fantasy-environment-307488) |
 | 利用規約 | [Standard Unity Asset Store EULA](https://unity.com/legal/as-terms) |
 | 使用箇所 | 背景 |
-| 備考 | Unity Asset Storeの無料アセット。本リポジトリにはアセットデータ本体を含めていません。 |
+| 備考 | — |
 
 ---
 
