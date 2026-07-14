@@ -34,7 +34,7 @@
 代わりに、デモ動画、技術資料、使用素材一覧、作品用スクリプトを掲載しています。
 
 ```txt
-PortfolioRepository/
+unity-3d-portfolio/
 ├─ Docs/
 │  ├─ TechnicalNote.md
 │  └─ Credits.md
