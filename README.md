@@ -31,7 +31,9 @@ unity-3d-portfolio/
 ├─ Images/
 │  └─ thumbnail.png
 ├─ Scripts/
-│  └─ 自作C#スクリプト
+│  └─ ScreenFadeInController.cs
+│  └─ ScreenFadeOutController.cs
+│  └─ VictoryTimelineController.cs
 ├─ Videos/
 │  └─ demo.mp4
 └─ README.md
