@@ -62,12 +62,13 @@ VictoryPerformanceScene
 ├─ Main Camera
 ├─ Directional Light
 ├─ Lime
-├─ Canvas
+├─ FadeInCanvas
 ├─ EventSystem
 ├─ CinemachineCameras
 ├─ TimelineDirector_Intro
 ├─ TimelineDirector_IdleLoop
 ├─ VictoryTimelineController
+├─ FadeOutCanvas
 ├─ AudioSources
 ├─ BackgroundRoot
 ├─ PostProcessVolume
