@@ -91,8 +91,8 @@ Unity上ではPrefabとして配置し、Animator、BlendShape、マテリアル
 
 ### 4.3 カメラ
 
-Main CameraにCinemachine Brainを追加し、複数のVirtual Cameraを使用してカメラワークを構成しています。  
-各Virtual CameraはTimeline上で切り替えタイミングを管理し、Virtual Camera間のブレンド設定を調整することで、キャラクターの動きや決めポーズが見やすくなるように、画角、距離、切り替えタイミングを調整しました。
+Main CameraにCinemachine Brainを追加し、複数のVirtual Cameraを使用してカメラワークを構成しています。
+各Virtual Cameraの位置・向き・キャラクターとの距離を調整し、Timeline上で切り替えタイミングを管理しています。また、Virtual Camera間のブレンドを調整することで、キャラクターの動きや決めポーズが見やすいカメラワークにしました。
 
 また、Virtual CameraのLook At設定を使用し、カメラがキャラクターの顔へ向くように設定しています。  
 これにより、演出中でもキャラクターの表情や決めポーズが見えやすくなるようにしました。
