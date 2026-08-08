@@ -10,8 +10,6 @@ public class VictoryTimelineController : MonoBehaviour
     [Header("Fade")]
     [SerializeField] private ScreenFadeOutController screenFadeOutController;
 
-    [Header("Options")]
-    [SerializeField] private bool playIntroOnStart = true;
 
     private bool isIdleLoopPlaying;
     private bool hasRequestedEnding;
@@ -39,11 +37,9 @@ public class VictoryTimelineController : MonoBehaviour
         isIdleLoopPlaying = false;
         hasRequestedEnding = false;
 
-        if (playIntroOnStart)
-        {
-            introDirector.time = 0;
-            introDirector.Play();
-        }
+        // IntroópTimelineÇç≈èâÇ©ÇÁçƒê∂Ç∑ÇÈ
+        introDirector.time = 0;
+        introDirector.Play();
     }
 
     private void Update()

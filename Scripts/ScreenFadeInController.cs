@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ScreenFadeInController : MonoBehaviour
 {
     [SerializeField] private Image fadeImage;
-    [SerializeField] private float fadeDuration = 1.0f;
+    [SerializeField] private float fadeDuration = 2.0f;
 
     private void Start()
     {

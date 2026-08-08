@@ -2,37 +2,37 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ç”»é¢å…¨ä½“ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã¨ã€ãã®å¾Œã«è¡¨ç¤ºã™ã‚‹ã€ŒThank Youã€ç”»åƒã®
-// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã‚’åˆ¶å¾¡ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+// ‰æ–Ê‘S‘Ì‚ÌƒtƒF[ƒhƒAƒEƒg‚ÆA‚»‚ÌŒã‚É•\¦‚·‚éuThank Youv‰æ‘œ‚Ì
+// ƒtƒF[ƒhƒCƒ“‚ğ§Œä‚·‚éƒNƒ‰ƒXB
 public class ScreenFadeOutController : MonoBehaviour
 {
     [Header("Fade Image")]
     [SerializeField] private Image fadeImage;
-    [SerializeField] private float fadeDuration = 1.0f;
+    [SerializeField] private float fadeDuration = 1.5f;
 
     [Header("Thank You Image")]
     [SerializeField] private Image thankYouImage;
-    [SerializeField] private float thankYouFadeDuration = 0.5f;
-    [SerializeField] private float delayBeforeThankYou = 0.2f;
+    [SerializeField] private float thankYouFadeDuration = 0.75f;
+    [SerializeField] private float delayBeforeThankYou = 0.75f;
 
-    // ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç†ã®å¤šé‡å®Ÿè¡Œã‚’é˜²æ­¢ã™ã‚‹ãŸã‚ã®ãƒ•ãƒ©ã‚°
+    // ƒtƒF[ƒhˆ—‚Ì‘½dÀs‚ğ–h~‚·‚é‚½‚ß‚Ìƒtƒ‰ƒO
     private bool isFading;
 
     private void Awake()
     {
-        // é–‹å§‹æ™‚ã¯ãƒ•ã‚§ãƒ¼ãƒ‰ç”¨ç”»åƒã‚’é€æ˜ã«ã—ã¦ãŠã
+        // ŠJn‚ÍƒtƒF[ƒh—p‰æ‘œ‚ğ“§–¾‚É‚µ‚Ä‚¨‚­
         SetImageAlpha(fadeImage, 0f);
 
         if (thankYouImage != null)
         {
-            // Thank Youç”»åƒã¯éè¡¨ç¤ºãƒ»é€æ˜ã®çŠ¶æ…‹ã§åˆæœŸåŒ–ã™ã‚‹
+            // Thank You‰æ‘œ‚Í”ñ•\¦E“§–¾‚Ìó‘Ô‚Å‰Šú‰»‚·‚é
             SetImageAlpha(thankYouImage, 0f);
             thankYouImage.gameObject.SetActive(false);
         }
     }
 
-    // ç”»é¢ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆå¾Œã«Thank Youç”»åƒã‚’è¡¨ç¤ºã™ã‚‹å‡¦ç†ã‚’é–‹å§‹ã™ã‚‹ã€‚
-    // ã™ã§ã«å‡¦ç†ä¸­ã®å ´åˆã¯å†å®Ÿè¡Œã—ãªã„ã€‚
+    // ‰æ–Ê‚ÌƒtƒF[ƒhƒAƒEƒgŒã‚ÉThank You‰æ‘œ‚ğ•\¦‚·‚éˆ—‚ğŠJn‚·‚éB
+    // ‚·‚Å‚Éˆ—’†‚Ìê‡‚ÍÄÀs‚µ‚È‚¢B
     public void StartFadeOutWithThankYou()
     {
         if (isFading)
@@ -43,24 +43,24 @@ public class ScreenFadeOutController : MonoBehaviour
         StartCoroutine(FadeOutWithThankYouCoroutine());
     }
 
-    // ç”»é¢ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã‹ã‚‰Thank Youç”»åƒè¡¨ç¤ºã¾ã§ã®ä¸€é€£ã®æ¼”å‡ºã‚’å®Ÿè¡Œã™ã‚‹ã€‚
+    // ‰æ–ÊƒtƒF[ƒhƒAƒEƒg‚©‚çThank You‰æ‘œ•\¦‚Ü‚Å‚Ìˆê˜A‚Ì‰‰o‚ğÀs‚·‚éB
     private IEnumerator FadeOutWithThankYouCoroutine()
     {
         isFading = true;
 
-        // ãƒ•ã‚§ãƒ¼ãƒ‰ç”¨ç”»åƒã‚’é€æ˜ã‹ã‚‰ä¸é€æ˜ã¸å¤‰åŒ–ã•ã›ã€ç”»é¢å…¨ä½“ã‚’æš—è»¢ã•ã›ã‚‹
+        // ƒtƒF[ƒh—p‰æ‘œ‚ğ“§–¾‚©‚ç•s“§–¾‚Ö•Ï‰»‚³‚¹A‰æ–Ê‘S‘Ì‚ğˆÃ“]‚³‚¹‚é
         if (fadeImage != null)
         {
             yield return FadeImageAlpha(fadeImage, 0f, 1f, fadeDuration);
         }
 
-        // Thank Youç”»åƒã‚’è¡¨ç¤ºã™ã‚‹å‰ã«ã€å¿…è¦ã«å¿œã˜ã¦å¾…æ©Ÿã™ã‚‹
+        // Thank You‰æ‘œ‚ğ•\¦‚·‚é‘O‚ÉA•K—v‚É‰‚¶‚Ä‘Ò‹@‚·‚é
         if (delayBeforeThankYou > 0f)
         {
             yield return new WaitForSeconds(delayBeforeThankYou);
         }
 
-        // Thank Youç”»åƒã‚’æœ‰åŠ¹åŒ–ã—ã€é€æ˜ã‹ã‚‰ä¸é€æ˜ã¸ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã™ã‚‹
+        // Thank You‰æ‘œ‚ğ—LŒø‰»‚µA“§–¾‚©‚ç•s“§–¾‚ÖƒtƒF[ƒhƒCƒ“‚·‚é
         if (thankYouImage != null)
         {
             thankYouImage.gameObject.SetActive(true);
@@ -68,7 +68,7 @@ public class ScreenFadeOutController : MonoBehaviour
         }
     }
 
-    // æŒ‡å®šã—ãŸImageã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’ã€ä¸€å®šæ™‚é–“ã‹ã‘ã¦å¤‰åŒ–ã•ã›ã‚‹ã€‚
+    // w’è‚µ‚½Image‚ÌƒAƒ‹ƒtƒ@’l‚ğAˆê’èŠÔ‚©‚¯‚Ä•Ï‰»‚³‚¹‚éB
     private IEnumerator FadeImageAlpha(
         Image image,
         float fromAlpha,
@@ -82,28 +82,28 @@ public class ScreenFadeOutController : MonoBehaviour
 
         float elapsed = 0f;
 
-        // è£œé–“é–‹å§‹å‰ã«ã€ç”»åƒã‚’æŒ‡å®šã—ãŸé–‹å§‹ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã¸è¨­å®šã™ã‚‹
+        // •âŠÔŠJn‘O‚ÉA‰æ‘œ‚ğw’è‚µ‚½ŠJnƒAƒ‹ƒtƒ@’l‚Öİ’è‚·‚é
         SetImageAlpha(image, fromAlpha);
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
 
-            // çµŒéæ™‚é–“ã‚’0ï½1ã®ç¯„å›²ã¸å¤‰æ›ã—ã€ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’ç·šå½¢è£œé–“ã™ã‚‹
+            // Œo‰ßŠÔ‚ğ0`1‚Ì”ÍˆÍ‚Ö•ÏŠ·‚µAƒAƒ‹ƒtƒ@’l‚ğüŒ`•âŠÔ‚·‚é
             float t = Mathf.Clamp01(elapsed / duration);
             float alpha = Mathf.Lerp(fromAlpha, toAlpha, t);
 
             SetImageAlpha(image, alpha);
 
-            // æ¬¡ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã¾ã§å¾…æ©Ÿã™ã‚‹
+            // Ÿ‚ÌƒtƒŒ[ƒ€‚Ü‚Å‘Ò‹@‚·‚é
             yield return null;
         }
 
-        // æµ®å‹•å°æ•°ç‚¹èª¤å·®ã«é–¢ä¿‚ãªãã€æœ€å¾Œã¯çµ‚äº†å€¤ã¸ç¢ºå®Ÿã«åˆã‚ã›ã‚‹
+        // •‚“®¬”“_Œë·‚ÉŠÖŒW‚È‚­AÅŒã‚ÍI—¹’l‚ÖŠmÀ‚É‡‚í‚¹‚é
         SetImageAlpha(image, toAlpha);
     }
 
-    // Imageã®RGBå€¤ã‚’ç¶­æŒã—ãŸã¾ã¾ã€ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã ã‘ã‚’å¤‰æ›´ã™ã‚‹ã€‚
+    // Image‚ÌRGB’l‚ğˆÛ‚µ‚½‚Ü‚ÜAƒAƒ‹ƒtƒ@’l‚¾‚¯‚ğ•ÏX‚·‚éB
     private void SetImageAlpha(Image image, float alpha)
     {
         if (image == null)

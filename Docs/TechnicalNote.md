@@ -339,9 +339,9 @@ Unityプロジェクト本体は公開していませんが、作品用スクリ
 
 | スクリプト名 | 役割 | アタッチ先 | 主な処理 |
 |---|---|---|---|
-| ScreenFadeInController.cs | 画面フェードインの制御 | フェード用Canvas / Imageを持つGameObject | 開始時にフェード用ImageのAlphaを1から0へ変化させ、画面を暗転状態から表示状態へ切り替える |
-| ScreenFadeOutController.cs | 画面フェードアウトとThank You表示の制御 | フェード用Canvas / Imageを持つGameObject | フェード用ImageのAlphaを0から1へ変化させ、一定時間後にThank You画像をフェードイン表示する |
-| VictoryTimelineController.cs | Timeline切り替えと終了演出の制御 | Timeline制御用GameObject | Intro用Timelineの終了後にIdleLoop用Timelineを再生し、IdleLoop中にEnterキー入力でTimelineを一時停止してフェードアウト演出を開始する |
+| ScreenFadeInController.cs | 画面フェードインの制御 | FadeInCanvas配下のGameObject「FadeInImage」 | 開始時にフェード用ImageのAlphaを1から0へ変化させ、画面を暗転状態から表示状態へ切り替える |
+| ScreenFadeOutController.cs | 画面フェードアウトとThank You表示の制御 | FadeOutCanvas配下のGameObject「ScreenFadeOutControllerObject」 | フェード用ImageのAlphaを0から1へ変化させ、一定時間後にThank You画像をフェードイン表示する |
+| VictoryTimelineController.cs | Timeline切り替えと終了演出の制御 | Timeline制御用GameObject「VictoryTimelineController」 | Intro用Timelineの終了後にIdleLoop用Timelineを再生し、IdleLoop中にEnterキー入力でTimelineを一時停止してフェードアウト演出を開始する |
 
 ### 7.1 スクリプト設計方針
 
@@ -354,7 +354,7 @@ Unityプロジェクト本体は公開していませんが、作品用スクリ
 
 - 作品規模に対して必要十分な構成にする
 - 画面フェードやTimeline切り替えなど、演出進行に必要な処理だけをスクリプト化する
-- Inspectorから参照先を設定できるようにし、Unity上で接続関係を確認しやすくする
+- 参照先や演出パラメータをInspectorから設定できるようにし、接続関係の確認や調整をしやすくする
 - Intro演出、IdleLoop、終了演出の流れが分かりやすくなるように役割を分ける
 - 将来的に改修する場合に、どのスクリプトを変更すればよいか把握しやすくする
 
@@ -369,11 +369,11 @@ Unityプロジェクト本体は公開していませんが、作品用スクリ
 | 項目 | 内容 |
 |---|---|
 | 目的 | シーン開始時に画面を暗転状態から表示状態へ切り替える |
-| アタッチ先 | フェード用Imageを持つCanvasまたはGameObject |
-| Inspector設定 | `fadeImage` にフェード用Imageを設定し、`fadeDuration` でフェード時間を指定する |
-| 動作タイミング | シーン開始時に `Start()` から自動で実行される |
-| 使用しているUnity機能 | `Image`、`Color.a`、`Coroutine`、`Mathf.Lerp`、`Time.deltaTime` |
-| 変更する場合に見る箇所 | フェード時間を変える場合は `fadeDuration`、対象Imageを変える場合は `fadeImage` を確認する |
+| アタッチ先 | FadeInCanvas配下のGameObject「FadeInImage」 |
+| Inspector設定 | `fadeImage`に同一GameObjectのImageコンポーネントを設定し、`fadeDuration`でフェードイン時間を指定する |
+| 動作タイミング | シーン開始時に`Start()`から`FadeIn()`をコルーチンとして開始する |
+| 使用している主なUnity API・機能 | `Image`、`Color.a`、`Coroutine`（`StartCoroutine()`）、`Mathf.Lerp`、`Time.deltaTime` |
+| 変更する場合に見る箇所 | フェードイン時間を変更する場合は`fadeDuration`、画像を差し替える場合は`fadeImage`の参照先を変更する |
 
 #### 処理概要
 
@@ -390,17 +390,17 @@ Unityプロジェクト本体は公開していませんが、作品用スクリ
 | 項目 | 内容 |
 |---|---|
 | 目的 | 終了時に画面をフェードアウトし、その後Thank You画像を表示する |
-| アタッチ先 | フェード用ImageとThank You用Imageを持つCanvasまたはGameObject |
-| Inspector設定 | `fadeImage` にフェード用Image、`thankYouImage` にThank You画像、`fadeDuration`、`thankYouFadeDuration`、`delayBeforeThankYou` に各表示時間を設定する |
-| 動作タイミング | `VictoryTimelineController` など外部スクリプトから `StartFadeOutWithThankYou()` が呼ばれたタイミングで実行される |
-| 使用しているUnity機能 | `Image`、`Color.a`、`Coroutine`、`Mathf.Lerp`、`WaitForSeconds`、`GameObject.SetActive` |
-| 変更する場合に見る箇所 | フェードアウト時間は `fadeDuration`、Thank You表示の速さは `thankYouFadeDuration`、表示までの待ち時間は `delayBeforeThankYou` を確認する |
+| アタッチ先 | FadeOutCanvas配下のGameObject「ScreenFadeOutControllerObject」 |
+| Inspector設定 | `fadeImage`にフェード用Image、`thankYouImage`にThank You画像を設定する。`fadeDuration`でフェードアウト時間、`thankYouFadeDuration`でThank You画像のフェードイン時間、`delayBeforeThankYou`で表示開始までの待機時間を指定する |
+| 動作タイミング | `VictoryTimelineController`から`StartFadeOutWithThankYou()`が呼ばれたタイミングで実行される |
+| 使用している主なUnity API・機能 | `Image`、`Color.a`、`Coroutine`（`StartCoroutine()`）、`Mathf.Lerp`、`Mathf.Clamp01`、`Time.deltaTime`、`WaitForSeconds`、`GameObject.SetActive()` |
+| 変更する場合に見る箇所 | フェードアウト時間を変更する場合は`fadeDuration`、Thank You画像のフェードイン時間を変更する場合は`thankYouFadeDuration`、表示開始までの待機時間を変更する場合は`delayBeforeThankYou`を確認する。画像を差し替える場合は、`fadeImage`または`thankYouImage`の参照先を変更する |
 
 #### 処理概要
 
 ```txt
 1. フェード用ImageのAlphaを0から1へ変化させ、画面を暗転させる
-2. 指定した待ち時間の後、Thank You画像を有効化する
+2. 指定した待機時間の経過後、Thank You画像を有効化する
 3. Thank You画像のAlphaを0から1へ変化させ、フェードイン表示する
 ```
 
@@ -410,12 +410,12 @@ Unityプロジェクト本体は公開していませんが、作品用スクリ
 
 | 項目 | 内容 |
 |---|---|
-| 目的 | Intro用Timeline、IdleLoop用Timeline、終了時のフェードアウト演出を制御する |
-| アタッチ先 | Timeline制御用GameObject |
-| Inspector設定 | `introDirector` にIntro用PlayableDirector、`idleLoopDirector` にIdleLoop用PlayableDirector、`screenFadeOutController` にScreenFadeOutControllerを持つGameObjectを設定する |
+| 目的 | Intro用Timeline、IdleLoop用Timeline、および終了演出への切り替えを制御する |
+| アタッチ先 | Timeline制御用GameObject「VictoryTimelineController」 |
+| Inspector設定 | `introDirector`にIntro用PlayableDirector、`idleLoopDirector`にIdleLoop用PlayableDirector、`screenFadeOutController`にGameObject「ScreenFadeOutControllerObject」のScreenFadeOutControllerコンポーネントを設定する |
 | 動作タイミング | シーン開始時にIntro用Timelineを再生し、Intro終了後にIdleLoopへ切り替える。IdleLoop中にEnterキーが押されるとIdleLoopを一時停止し、終了演出を開始する |
-| 使用しているUnity機能 | `PlayableDirector`、Timeline、`stopped` イベント、`Input.GetKeyDown`、`KeyCode.Return`、`SerializeField` |
-| 変更する場合に見る箇所 | 再生するTimelineを変える場合は `introDirector` / `idleLoopDirector`、終了時の演出を変える場合は `screenFadeOutController`、開始時にIntroを再生するかは `playIntroOnStart` を確認する |
+| 使用している主なUnity API・機能 | `PlayableDirector`、`Timeline`、`PlayableDirector.stopped`イベント、`Input.GetKeyDown()`、`KeyCode.Return` |
+| 変更する場合に見る箇所 | 再生するTimelineの参照先を変更する場合は`introDirector`または`idleLoopDirector`、終了演出の呼び出し先を変更する場合は`screenFadeOutController`を確認する。 |
 
 #### 処理概要
 
@@ -632,23 +632,25 @@ Wiggle 2を使用した処理はBlender 4.2 LTS上で行い、その後の作業
 
 上記の活用範囲のうち、本作品のスクリプト作成では、AIによる実装補助を活用しました。
 
-各スクリプトが作品内でどのような役割を持ち、どのタイミングで処理が実行されるかは確認しています。  
-また、`Start()`、`Awake()`、`Update()`などのUnityイベント関数や、`SerializeField`を使用したInspectorとの接続については、基礎的な仕組みを理解しており、必要に応じて調査しながら実装内容を追うことができます。
+実装後は各スクリプトのコードを見直し、作品内での役割、実行タイミング、スクリプト間の参照関係を確認しました。また、処理の流れを追い、基本的な修正箇所を判断できる状態にしています。
 
-一方で、今回使用した演出制御については、設計意図を含めて同等の構成を自力で再設計・再実装する力を、今後さらに高める必要があると考えています。
+本作品のコード確認を通じて、主に以下の仕組みを確認しました。
 
-今後は本作品で使用したコードを改めて追いながら、以下の内容について理解を深めます。
-
-- Unityイベント関数の用途や実行順序
-- `SerializeField`で設定した参照の使い方
-- Coroutineを使用した時間経過処理
-- `PlayableDirector`とTimelineの制御
-- イベントの登録と解除
+- `Start()`、`Awake()`、`Update()`などのUnityイベント関数の用途
+- `[SerializeField]`を使用したInspectorとの接続
+- Coroutineによる複数フレームにわたる時間経過処理
+- `yield return`による待機条件と処理再開の仕組み
+- `PlayableDirector`を使用したIntro・IdleLoop用Timelineの再生、停止、一時停止
+- `PlayableDirector.stopped`イベントの登録と、`OnDestroy()`での解除
 - UI ImageのAlpha制御
-- 入力処理と状態管理
-- クラス間の参照と責務分離
+- `Input.GetKeyDown()`によるEnterキー入力の判定と、`bool`フラグによる実行状態の管理
+- VictoryTimelineControllerとScreenFadeOutControllerのクラス間参照、およびTimeline進行と画面フェードの責務分離
+- 処理の性質に応じた`Update()`、イベント、Coroutineの使い分け
+- `null`チェック、多重実行防止、イベント解除など、安全性・保守性や将来の構成変更を考慮した処理
 
-最終的には、AIによる補助を活用しながらも、生成されたコードの内容を検証し、同等の処理を自分で設計・実装できる状態を目指します。
+一方で、同等の演出制御をゼロから設計・実装し、オブジェクトのライフサイクルや将来の変更を踏まえて、安全性・保守性・拡張性を自ら判断して実装する力については、今後も経験を重ねながら高めていく必要があると考えています。
+
+今後は、AIによる補助を活用しながらも、生成されたコードの内容を自分で検証・説明・修正するとともに、処理の役割やライフサイクル、変更時の影響範囲を考慮し、最終的には同等の処理を自ら設計・実装できる状態を目指します。
 
 ### 12.3 制作工程の再現性向上
 
